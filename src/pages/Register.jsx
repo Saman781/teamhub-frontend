@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Lock, Sparkles, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Lock, Sparkles, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
-export default function Login() {
+export default function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,10 +19,10 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      await login(email, password);
+      await register(name, email, password);
       navigate("/dashboard");
     } catch (err) {
-      setError("Invalid email or password. Please try again.");
+      setError(err.response?.data?.message || "Something went wrong. Try a different email.");
     } finally {
       setLoading(false);
     }
@@ -44,8 +45,8 @@ export default function Login() {
           >
             <Sparkles className="text-white" size={24} />
           </motion.div>
-          <h1 className="text-3xl font-display font-bold text-[#E8EAFF] tracking-tight">Team Hub</h1>
-          <p className="text-[#6B7280] mt-2 text-sm font-mono">// sign in to continue</p>
+          <h1 className="text-3xl font-display font-bold text-[#E8EAFF] tracking-tight">Create Account</h1>
+          <p className="text-[#6B7280] mt-2 text-sm font-mono">// join Team Hub</p>
         </div>
 
         {error && (
@@ -59,6 +60,18 @@ export default function Login() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="relative">
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]" size={18} />
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{ color: "#E8EAFF" }}
+              className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-[#141830] border border-[#1E2245] placeholder:text-[#6B7280] focus:outline-none focus:border-[#7C3AED] transition-colors"
+              placeholder="Full Name"
+            />
+          </div>
           <div className="relative">
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]" size={18} />
             <input
@@ -76,11 +89,12 @@ export default function Login() {
             <input
               type={showPassword ? "text" : "password"}
               required
+              minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               style={{ color: "#E8EAFF" }}
               className="w-full pl-11 pr-11 py-3.5 rounded-xl bg-[#141830] border border-[#1E2245] placeholder:text-[#6B7280] focus:outline-none focus:border-[#7C3AED] transition-colors"
-              placeholder="••••••••"
+              placeholder="At least 6 characters"
             />
             <button
               type="button"
@@ -98,18 +112,18 @@ export default function Login() {
             className="w-full py-3.5 rounded-xl font-semibold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             style={{ background: "#7C3AED" }}
           >
-            {loading ? "Signing in..." : (
+            {loading ? "Creating account..." : (
               <>
-                Sign In <ArrowRight size={18} />
+                Create Account <ArrowRight size={18} />
               </>
             )}
           </motion.button>
         </form>
 
         <p className="text-center text-sm text-[#6B7280] mt-6">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-[#7C3AED] font-semibold hover:underline">
-            Sign Up
+          Already have an account?{" "}
+          <Link to="/login" className="text-[#7C3AED] font-semibold hover:underline">
+            Sign In
           </Link>
         </p>
       </motion.div>

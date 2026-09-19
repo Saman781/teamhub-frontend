@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Tag } from "lucide-react";
 import Layout from "../components/Layout";
 
-const API_URL = "http://127.0.0.1:8000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
 const ROLE_COLORS = {
   Admin: "#7C3AED",

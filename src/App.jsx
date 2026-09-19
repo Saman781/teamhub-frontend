@@ -81,7 +81,7 @@ function App() {
               background: "#0F1326",
               color: "#E8EAFF",
               border: "1px solid #1E2245",
-              fontFamily: "Nunito, sans-serif",
+              fontFamily: "Nunito, sans-serif
             },
             success: { iconTheme: { primary: "#10B981", secondary: "#0F1326" } },
             error: { iconTheme: { primary: "#EF4444", secondary: "#0F1326" } },

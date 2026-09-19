@@ -5,7 +5,7 @@ import { UserPlus, Trash2, X, Mail, Search, AlertTriangle } from "lucide-react";
 import toast from "react-hot-toast";
 import Layout from "../components/Layout";
 
-const API_URL = "http://127.0.0.1:8000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
 const ROLE_COLORS = {
   Admin: "#7C3AED",

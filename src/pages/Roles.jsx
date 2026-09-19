@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { KeyRound, ShieldCheck } from "lucide-react";
 import Layout from "../components/Layout";
 
-const API_URL = "http://127.0.0.1:8000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
 const ROLE_COLORS = ["#7C3AED", "#06B6D4", "#F59E0B", "#10B981", "#EC4899"];
 

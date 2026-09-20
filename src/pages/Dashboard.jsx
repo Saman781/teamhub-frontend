@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Users, KeyRound, Tag, ArrowUpRight, ShieldCheck, TrendingUp } from "lucide-react";
 import Layout from "../components/Layout";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+const API_URL = "https://teamhub-backend-production-8ab4.up.railway.app/api";
 
 export default function Dashboard() {
   const { user, roles } = useAuth();
